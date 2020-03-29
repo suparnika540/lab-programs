@@ -1,0 +1,188 @@
+
+1. Write a C program to print preorder, inorder, and postorder traversal on Binary Tree. 
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+    int data;
+    struct node* left;
+    struct node* right;
+};
+
+void inorder(struct node* root){
+    if(root == NULL) return;
+    inorder(root->left);
+    printf("%d ", root->data);
+    inorder(root->right);
+}
+
+void preorder(struct node* root){
+    if(root == NULL) return;
+    printf("%d ", root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void postorder(struct node* root) {
+    if(root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ", root->data);
+}
+struct node* createNode(int value)
+{
+    struct node* newNode = malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+void main()
+{
+    struct node* root = createNode(20);
+    root->left=createNode(116);
+    root->right=createNode(84);
+    root->left->left=createNode(22);
+    root->left->right=createNode(14);
+    root->left->right->left=createNode(56);
+    root->left->right->right=createNode(66);
+    printf("Inorder traversal \n");
+    inorder(root);
+    printf("\nPreorder traversal \n");
+    preorder(root);
+    printf("\nPostorder traversal \n");
+    postorder(root);
+}
+
+2.Write a C program to create (or insert) and inorder traversal on Binary Search Tree.
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+    int data;
+    struct node* left;
+    struct node* right;
+};
+struct node *newNode(int item) 
+{ 
+    struct node *temp =  (struct node *)malloc(sizeof(struct node)); 
+    temp->data = item; 
+    temp->left = temp->right = NULL; 
+    return temp; 
+} 
+struct node* insert(struct node *node, int value) 
+{ 
+if (node == NULL) return newNode(value); 
+  if (value < node->data) 
+        node->left  = insert(node->left, value); 
+    else if (value > node->data) 
+        node->right = insert(node->right, value);    
+return node; 
+}  
+void inorder(struct node* root){
+    if(root == NULL) return;
+    inorder(root->left);
+    printf("%d ", root->data);
+    inorder(root->right);
+}
+void main() 
+{ 
+    struct node *root = NULL; 
+    int i=0, item;
+    while(i<5)
+    {
+        printf("enter element:");
+        scanf("%d",&item);
+        root= insert(root,item);
+        i++;
+    }
+    printf("\ninorder traversal \n");
+    inorder(root);
+} 
+3.Write a C program for linear search algorithm.
+#include<stdio.h>
+void linearsearch(int arr[],int item)
+{
+    for(int i=0;arr[i]!='\0';i++)
+    {
+        if (arr[i]==item)
+        {
+            printf("item found at index %d",i);
+        }
+        else
+        {
+            continue;
+        }
+    }
+}
+int main()
+{
+    int arr[]={1,2,5,3,4,7,8,9,10},a;
+    printf("enter element that you want to search:");
+    scanf("%d",&a);
+    linearsearch(arr,a);
+}
+4.Write a C program for binary search algorithm
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+    int data;
+    struct node* left;
+    struct node* right;
+};
+struct node *newNode(int item) 
+{ 
+    struct node *temp =  (struct node *)malloc(sizeof(struct node)); 
+    temp->data = item; 
+    temp->left = temp->right = NULL; 
+    return temp; 
+} 
+struct node* insert(struct node *node, int value) 
+{ 
+if (node == NULL) return newNode(value); 
+  if (value < node->data) 
+        node->left  = insert(node->left, value); 
+    else if (value > node->data) 
+        node->right = insert(node->right, value);    
+return node; 
+}  
+void binarysearch(struct node *root,int item)
+{   
+        if (root->data==item)
+        {
+            printf("item found");
+        }
+        else if (root->data<item)
+        {
+            if (root->right=='\0')
+            {
+                printf("item not found");
+            }
+            else{
+            binarysearch(root->right,item);}
+        }
+        else
+        {   if (root->left=='\0')
+            {
+                printf("item not found");
+            }
+            else
+            {
+                binarysearch(root->left,item);
+            }
+        }
+}
+void main() 
+{ 
+    struct node *root = NULL; 
+    int i=0, item,element;
+    while(i<5)
+    {
+        printf("enter element:");
+        scanf("%d",&item);
+        root= insert(root,item);
+        i++;
+    }
+    printf("enter element that you want to search:");
+    scanf("%d",&element);
+    binarysearch(root,element);
+}
+
